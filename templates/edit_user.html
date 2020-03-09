@@ -1,0 +1,9 @@
+<h2>User settings</h2>
+<form method="POST">
+{% for key in user_edit %}
+    {% if key not in ['id', 'access', 'access_id'] %}
+    <p>{{ key }}: <input type="text" value="{{user_edit[key]}}"></p>
+    {% endif %}
+{% endfor %}
+</form>
+<a href="/admin/">Go back</a>

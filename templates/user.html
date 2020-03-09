@@ -1,0 +1,30 @@
+{% if name != session['account'] %}
+    <p>Something went wrong, please go to 
+        <a href={{ url_for('login') }}>Log In</a> / 
+        <a href={{ url_for('index') }}>Sign Up</a>
+    </p>
+
+{% else %}
+
+    <h1>TODO APP</h1>
+    <p>Hello, {{ name|title }}!</p>
+    <p>What did you eat for breakfast?</p>
+    <input type="text" placeholder="Add task">
+    <input type="submit" value="+" onclick=create_task(event)>
+    <ol>
+    {% for task in tasks %}
+    <li id={{ loop.index|string }}>
+        {{ task.title }} {{ task.status }}
+        <a href={{ "/status_task/" + loop.index|string }}>Change Status</a>
+        <a href="#" onclick=remove_task(event)>Remove</a>
+    </li>
+    {% endfor %}
+    </ol>
+    
+    {% if access_id >= 3 %}
+    <a href={{ url_for('admin_panel') }}>Admin panel</a>
+    {% endif %}
+    <a href={{ url_for('logout') }}>Log Out</a>
+
+    <script src={{ url_for('static', filename='script.js') }}></script>
+{% endif %}

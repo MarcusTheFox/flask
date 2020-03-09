@@ -1,0 +1,26 @@
+<h1>TODO APP</h1>
+
+
+{% if error == 'passwords_dont_match' %}
+<p>Sorry, seems like passwords you entered don't match. Try again</p>
+{% elif error == 'account_already_exists' %}
+<p>Sorry, seems like this account already exists. Try again</p>
+{% endif %}
+
+
+<form method="POST">
+    <label>Name</label>
+    <input minlength="5" maxlength="20" name="name" required>
+    <br>
+    <label>Email</label>
+    <input type="email" maxlength="30" name="email" required>
+    <br>
+    <label>Password</label>
+    <input type="password" minlength="6" maxlength="20" name="password" required>
+    <br>
+    <label>Password</label>
+    <input type="password" minlength="6" maxlength="20" name="password_check" required>
+    <br>
+    <input type="submit" value="Send!">
+    <a href="/login">Already have Account</a>
+</form>

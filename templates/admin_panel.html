@@ -1,0 +1,51 @@
+<form method="POST">
+    <div>
+        {% for name, access, access_id in users_list %}
+            {% if user_access >= access_id %}
+            <p id={{ loop.index|string }}>
+                <input type="text" name='name' value={{ name }}>
+                <select 
+                        name="access" required>
+                    <option 
+                        {% if access == 'User' %}
+                            selected
+                        {% endif %}
+                        value="User">User</option>
+                    <option 
+                        {% if access == 'VIP' %}
+                            selected
+                        {% endif %}
+                        value="VIP">VIP</option>
+                    <option 
+                        {% if access == 'Moderator' %}
+                            selected
+                        {% endif %}
+                        value="Moderator">Moderator</option>
+                    <option 
+                        {% if access == 'Admin' %}
+                            selected
+                        {% endif %}
+                        value="Admin">Admin</option>
+                    {% if user_access == 4 %}
+                    <option 
+                        {% if access == 'Super-admin' %}
+                            selected                
+                        {% endif %} 
+                        value="Super-admin">Super-admin</option>
+                    {% endif %}
+                </select>
+                {% if user_access == 4 %}
+                <a href='#' onclick=remove_user(event)>Delete</a>
+                <a href='/edit_user/{{ name }}'>Edit</a>
+                <script src={{ url_for('static', filename='script.js') }}></script>
+                {% endif %}
+            </p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <!-- <input type="text" name="name" placeholder="Name" required> -->
+    <!-- <input type="text" placeholder="New access" > -->
+    
+    <input type="submit" value="change access">
+    <a href={{ "/users/" + username }}>Go back</a>
+</form>

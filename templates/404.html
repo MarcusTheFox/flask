@@ -1,0 +1,6 @@
+<h1>404 error</h1>
+{% if username %}
+<a href={{ "/users/" + username }}>Go back</a>
+{% else %}
+<a href={{ url_for('index') }}>Go back</a>
+{% endif %}

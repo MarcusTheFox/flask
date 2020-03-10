@@ -108,7 +108,8 @@ def update_pw_form():
             if password == password_confirm:
                 update_password(session['email'], password)
                 name = check_user(session['email'], password)
-                session['email'], session['secret_code'] = None, None
+                session.pop('secret_code', None)
+                session.pop('email', None)
                 session['account'] = name
                 return redirect('/users/' + name)
             else:

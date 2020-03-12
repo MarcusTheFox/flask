@@ -1,0 +1,20 @@
+* {
+    border: 1px solid #000;
+}
+
+div.card {
+    width: 220px;
+    margin: 20px;
+}
+
+div.card-img {
+    height: 100px;
+    width: 100%;
+    background: url(https://avatars.mds.yandex.net/get-pdb/1598525/02eee8c3-9469-4a94-8d70-42ab42fc1519/s1200);
+    background-size: cover;
+    background-position: center;
+}
+
+h2.card-heading {
+    margin-top: 0;
+}

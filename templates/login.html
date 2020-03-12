@@ -1,3 +1,8 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+
 <h1>TODO APP</h1>
 
 
@@ -16,7 +21,7 @@
     <label>Password</label>
     <input type="password" minlength="6" maxlength="20" name="password" required>
     <br>
-    <input type="checkbox" name="remember">
+    <input type="checkbox" name="remember" id="remember">
     <label>Remember Me</label>
     <br>
     <input type="submit" value="Log In">

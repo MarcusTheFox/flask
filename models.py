@@ -47,7 +47,7 @@ class User(Abstract, Base):
 
 class Task(Abstract, Base):
     __tablename__ = 'tasks'
-    title = Column(String(20), nullable=False, unique=True)
+    title = Column(String(20), nullable=False)
     author_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     details = Column(Text)
     deadline = Column(Date)
@@ -157,10 +157,10 @@ def get_user_tasks(name):
     return None
 
 
-def create_user_task(name, title, details='', deadline=None):
+def create_user_task(author_id, title, details='', deadline=None):
     engine = create_engine('sqlite:///app.db', echo=True)
     session = Session(bind=engine)
-    user = session.query(User).filter_by(username=name).first()
+    user = session.query(User).get(author_id)
     user_tasks = user.tasks
     new_task = Task(title=title, details=details, deadline=deadline)
     user_tasks.append(new_task)

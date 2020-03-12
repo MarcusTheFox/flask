@@ -119,7 +119,8 @@ def update_pw_form():
 @app.route('/create_task/<task>')
 def create_task(task):
     if 'account' in session:
-        create_user_task(session['account'], task)
+        user_id = get_user_info(session['account'])['id']
+        create_user_task(user_id, task)
         return redirect(url_for('user_page', name=session['account']))
     return render_template('404.html')
 

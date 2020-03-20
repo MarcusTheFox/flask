@@ -1,4 +1,14 @@
-input[type="checkbox"], label#remember {
+form * {
+    opacity: 0;
+}
+
+input[type='checkbox']{
+    display: inline;
+    width: initial;
+    /*vertical-align: middle;*/
+}
+
+#remember{
     display: inline;
     width: initial;
 }

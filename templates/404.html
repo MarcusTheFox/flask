@@ -1,6 +1,28 @@
-<h1>404 error</h1>
-{% if username %}
-<a href={{ "/users/" + username }}>Go back</a>
-{% else %}
-<a href={{ url_for('index') }}>Go back</a>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            height: 100%;
+            background-image: url(https://steamuserimages-a.akamaihd.net/ugc/790881165040719142/2FB88AF2403BA77CB61147C9D1C58C8A0103E7F9/);
+            background-size: cover;
+        }
+
+        a {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            text-decoration: none;
+            color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    {% if username %}
+    <a href={{ "/users/" + username }}>Go back</a>
+    {% else %}
+    <a href={{ url_for('index') }}>Go back</a>
+    {% endif %}
+</body>
+</html>

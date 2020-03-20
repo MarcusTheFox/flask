@@ -1,5 +1,5 @@
 function remove_task(event) {
-    const id = event.target.parentNode.id
+    const id = event.target.parentNode.parentNode.id
     fetch('/remove_task/' + id).then(response => window.location.reload())
     console.log(id)
 }

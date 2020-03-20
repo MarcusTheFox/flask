@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-# from models import (add_user, check_user, get_user_tasks, change_user_task,
-#                     remove_user_task, create_user_task, change_access)
-from models import *
+from models import add_user, remove_user, check_user, get_user_info, get_users_list
+from models import get_user_tasks, change_user_task, remove_user_task, create_user_task
+from models import change_access, update_password
+
 from mail_send import reset_password
 
 from sqlalchemy.exc import IntegrityError
@@ -36,8 +37,15 @@ def index():
         return redirect('/users/' + name)
     return render_template('index.html')
 
-@app.route('/users/<name>')
+@app.route('/users/<name>', methods=['GET', 'POST'])
 def user_page(name):
+    if request.method == 'POST':
+        title = request.form['title']
+        details = request.form['details']
+        deadline = request.form['deadline']
+        user_id = get_user_info(name)['id']
+        create_user_task(user_id, title, details, deadline)
+        return redirect('/users/'+name)
     user_tasks = get_user_tasks(name)
     access_id = None
     if get_user_info(name) != None:
@@ -51,7 +59,7 @@ def admin_panel():
         if user_info["access_id"] >= 3:
             users_list = get_users_list()
             users_list = [(
-                        users_list[i].username, 
+                        users_list[i].username,
                         users_list[i].access,
                         users_list[i].access_id
                         ) for i in range(len(users_list))]
@@ -63,8 +71,8 @@ def admin_panel():
                     access = change_access(name[i], new_access[i])
                     print("\n"+access+"\n")
                 return redirect('/admin/')
-            return render_template('admin_panel.html', users_list=users_list, 
-                                                    username=session['account'], 
+            return render_template('admin_panel.html', users_list=users_list,
+                                                    username=session['account'],
                                                     user_access=user_info["access_id"])
         else:
             return render_template('404.html', username=user_info["name"])
@@ -101,6 +109,8 @@ def update_pw_form():
             if session['secret_code'] == code:
                 return render_template('reset_password.html', error=False, code='no_error')
             else:
+                session.pop('secret_code', None)
+                session.pop('email', None)
                 return render_template('reset_password.html', error=False, code='error')
         if 'password' in request.form:
             password = request.form['password']

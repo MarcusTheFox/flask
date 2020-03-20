@@ -1,5 +1,6 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 </head>
 
 <h1>TODO APP</h1>
@@ -15,16 +16,12 @@
 <form method="POST">
     <label>Name</label>
     <input minlength="5" maxlength="20" name="name" placeholder="Name" required>
-    <br>
     <label>Email</label>
     <input type="email" maxlength="30" name="email" placeholder="Email" required>
-    <br>
     <label>Password</label>
     <input type="password" minlength="6" maxlength="20" name="password" placeholder="Password" required>
-    <br>
     <label>Password</label>
     <input type="password" minlength="6" maxlength="20" name="password_check" placeholder="Password check" required>
-    <br>
     <input type="submit" value="Send">
-    <a href="/login">Already have account</a>
+    <p onclick=animation(-0.01)>Already have account</p>
 </form>

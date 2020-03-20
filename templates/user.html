@@ -1,44 +1,56 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <script src={{ url_for('static', filename='script.js') }}></script>
+    <script src="{{ url_for('static', filename='user.js') }}"></script>
 </head>
 
 {% if name != session['account'] %}
-    <p>Something went wrong, please go to 
-        <a href={{ url_for('login') }}>Log In</a> / 
+    <p>Something went wrong, please go to
+        <a href={{ url_for('login') }}>Log In</a> /
         <a href={{ url_for('index') }}>Sign Up</a>
     </p>
 
 {% else %}
-
     <h1>TODO APP</h1>
-    <p>Hello, {{ name|title }}!</p>
-    <p>What did you eat for breakfast?</p>
-    <input type="text" placeholder="Add task">
-    <input type="submit" value="+" onclick=create_task(event)>
+    <div class="hello">
+        <p>Hello, {{ name|title }}!</p>
+        <p>This is Your tasks</p>
+    </div>
+    <div id="close_form" onclick=close_task_form()></div>
+    <form method="post">
+        <input type="text" placeholder="Add task" name="title" required>
+        <input type="text" placeholder="Add details" name="details">
+        <input type="text" placeholder="Add deadline" name="deadline">
+        <input type="submit" value="+">
+    </form>
+
+
     <div class="wrapper">
     {% for task in tasks %}
-    <div id={{ loop.index|string }} class="card">
+    <div id={{ loop.index|string }} class="card" {% if task.status == True %} style="background: rgba(0,40,0,0.5);" {% else %} style="background: rgba(40,0,0,0.5);" {% endif %}>
         <div class="card-img"></div>
         <h2 class="card-heading">{{ task.title }}</h2>
         <p class="card-details">{{ task.details }}</p>
-        <p class="card-start-date">Created: {{ task.created_on }}</p>
-        {% if task.deadline %}
+         {% if task.deadline %}
         <p class="card-end-date">Deadline: {{ task.deadline }}</p>
-        {% endif %}
+         {% endif %}
+        <p class="card-start-date">Created: {{ task.created_on }}</p>
+         <!--<p>{{ task.status }}</p> -->
         <div class="card-ui">
-            <!-- {{ task.status }} -->
-            <a href={{ "/status_task/" + loop.index|string }}>Change Status</a>
-            <a href="#" onclick=remove_task(event)>Remove</a>
+            <a href={{ "/status_task/" + loop.index|string }} id="change">Change Status</a>
+            <a href="#" id="remove" onclick=remove_task(event)>Remove</a>
         </div>
     </div>
     {% endfor %}
+    <div id="new_task" class="card">
+        <div id="plus" onclick=add_task_form()>+</div>
     </div>
-    
+    </div>
     {% if access_id >= 3 %}
-    <a href={{ url_for('admin_panel') }}>Admin panel</a>
+    <a href={{ url_for('admin_panel') }} class="buttons admin-panel">Admin panel</a>
     {% endif %}
-    <a href={{ url_for('logout') }}>Log Out</a>
+    <a href={{ url_for('logout') }} class="buttons logout">Log Out</a>
 
-    <script src={{ url_for('static', filename='script.js') }}></script>
+
 {% endif %}

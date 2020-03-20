@@ -1,6 +1,7 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
 </head>
 
 <h1>TODO APP</h1>
@@ -17,13 +18,10 @@
 <form method="POST">
     <label>Email</label>
     <input type="email" maxlength="30" name="email" required>
-    <br>
     <label>Password</label>
     <input type="password" minlength="6" maxlength="20" name="password" required>
-    <br>
     <input type="checkbox" name="remember" id="remember">
-    <label>Remember Me</label>
-    <br>
+    <label id="remember">Remember Me</label>
     <input type="submit" value="Log In">
-    <a href='/reset_password'>Не помню пароль</a>
+    <!--<a href='/reset_password'>Не помню пароль</a>-->
 </form>

@@ -4,33 +4,33 @@
             {% if user_access >= access_id %}
             <p id={{ loop.index|string }}>
                 <input type="text" name='name' value={{ name }}>
-                <select 
+                <select
                         name="access" required>
-                    <option 
+                    <option
                         {% if access == 'User' %}
                             selected
                         {% endif %}
                         value="User">User</option>
-                    <option 
+                    <option
                         {% if access == 'VIP' %}
                             selected
                         {% endif %}
                         value="VIP">VIP</option>
-                    <option 
+                    <option
                         {% if access == 'Moderator' %}
                             selected
                         {% endif %}
                         value="Moderator">Moderator</option>
-                    <option 
+                    <option
                         {% if access == 'Admin' %}
                             selected
                         {% endif %}
                         value="Admin">Admin</option>
                     {% if user_access == 4 %}
-                    <option 
+                    <option
                         {% if access == 'Super-admin' %}
-                            selected                
-                        {% endif %} 
+                            selected
+                        {% endif %}
                         value="Super-admin">Super-admin</option>
                     {% endif %}
                 </select>
@@ -45,7 +45,7 @@
     </div>
     <!-- <input type="text" name="name" placeholder="Name" required> -->
     <!-- <input type="text" placeholder="New access" > -->
-    
-    <input type="submit" value="change access">
+
+    <!--<input type="submit" value="change access">-->
     <a href={{ "/users/" + username }}>Go back</a>
 </form>

@@ -8,7 +8,7 @@ from email.mime.image import MIMEImage              # Изображения
 
 addr_from = "FNovik92@gmail.com"                 # Адресат
 # addr_to   = "fb@mail.ru"                   # Получатель
-password  = "eTpg7U4Omq"                                  # Пароль
+password  = "9e1ebd68ca17388a382abf047e"                                  # Пароль
 
 def reset_password(addr_to):
   secret = str(randint(10**6, 10**7))

@@ -138,7 +138,7 @@ def get_user_tasks(name):
     return None
 
 
-def create_user_task(author_id, title, details='', deadline=None):
+def create_user_task(author_id, title, details='', deadline=None, status=False):
     engine = create_engine('sqlite:///app.db', echo=True)
     session = Session(bind=engine)
     user = session.query(User).get(author_id)
@@ -148,6 +148,7 @@ def create_user_task(author_id, title, details='', deadline=None):
         new_task = Task(title=title, details=details, deadline=deadline)
     else:
         new_task = Task(title=title, details=details, deadline=None)
+    new_task.status = status
     user_tasks.append(new_task)
     session.commit()
     session.close()
